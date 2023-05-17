@@ -1,0 +1,37 @@
+version: "3"
+services:
+  micro-header:
+    container_name: micro-header
+    ports:
+      - 4300:4300
+    build: 
+      context: ./micro-header
+      dockerfile: Dockerfile
+  
+  micro-dashboard:
+    container_name: micro-dashboard
+    ports:
+      - 4202:4202
+    build: 
+      context: ./micro-dashboard
+      dockerfile: Dockerfile
+  
+  micro-footer:
+    container_name: micro-footer
+    ports:
+      - 4201:4201
+    build: 
+      context: ./micro-footer
+      dockerfile: Dockerfile
+
+  micro-root:
+    container_name: micro-root
+    ports:
+      - "4200:4200"
+    depends_on:
+      - micro-header
+      - micro-dashboard
+      - micro-footer
+    build: 
+      context: ./micro-root
+      dockerfile: Dockerfile
